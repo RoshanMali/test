@@ -1,0 +1,80 @@
+<ng-container *transloco="let t">
+  <mat-card>
+    <mat-card-header class="container">
+      <div mat-card-avatar>
+        <mat-icon class="mr-5">directions_car_filled</mat-icon>
+      </div>
+      <mat-card-title>{{t('Search Car')}}</mat-card-title>
+      <mat-card-subtitle>{{t('Please fill in the below details')}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="searchForm" (ngSubmit)="submit()" class="container">
+        <div class="m-auto" fxLayout="column">
+          <mat-form-field appearance="outline">
+            <mat-label>{{t('PICK-UP LOCATION')}}</mat-label>
+            <input type="text" matInput formControlName="pickupLocation">
+            <mat-hint>{{t('Eg. Pune, SB Road etc.')}}</mat-hint>
+            <mat-error *ngIf="searchForm.controls.pickupLocation.hasError('required')">
+              {{t('Pick-Up location is')}} <strong>{{t('required')}}</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="m-auto" fxLayout="row" fxLayoutAlign=" none" fxLayoutGap="10px">
+          <mat-form-field appearance="outline" fxFlex="50">
+            <mat-label>{{t('PICK-UP DATE')}}</mat-label>
+            <input matInput [matDatepicker]="pickup" formControlName="pickUpDate">
+            <mat-hint>{{t('Eg. 1/16/2022')}}</mat-hint>
+            <mat-error *ngIf="searchForm.controls.pickUpDate.hasError('required')">
+              {{t('Pick-Up Date is')}} <strong>{{t('required')}}</strong>
+            </mat-error>
+            <mat-datepicker-toggle matSuffix [for]="pickup"></mat-datepicker-toggle>
+            <mat-datepicker #pickup></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFlex="50">
+            <mat-label>{{t('PICK-UP TIME')}}</mat-label>
+            <input type="time" matInput formControlName="pickUpTime">
+            <mat-hint>{{t('Eg. 4:20 PM.')}}</mat-hint>
+            <mat-error *ngIf="searchForm.controls.pickUpTime.hasError('required')">
+              {{t('Pick-Up Time is')}} <strong>{{t('required')}}</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="m-auto" fxLayout="row" fxLayoutAlign=" none" fxLayoutGap="10px">
+          <mat-form-field appearance="outline" fxFlex="50">
+            <mat-label>{{t('DROP-OFF DATE')}}</mat-label>
+            <input matInput [matDatepicker]="dropOff" formControlName="dropOffDate">
+            <mat-hint>{{t('Eg. 1/18/2022')}}</mat-hint>
+            <mat-error *ngIf="searchForm.controls.dropOffDate.hasError('required')">
+              {{t('Drop-Off Date is')}} <strong>{{t('required')}}</strong>
+            </mat-error>
+            <mat-datepicker-toggle matSuffix [for]="dropOff"></mat-datepicker-toggle>
+            <mat-datepicker #dropOff></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFlex="50">
+            <mat-label>{{t('DROP-OFF TIME')}}</mat-label>
+            <input type="time" matInput formControlName="dropOffTime">
+            <mat-hint>{{t('Eg. 5:20 PM.')}}</mat-hint>
+            <mat-error *ngIf="searchForm.controls.dropOffTime.hasError('required')">
+              {{t('Drop-Off Time is')}} <strong>{{t('required')}}</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="m-auto" fxLayout="column">
+          <mat-form-field appearance="outline">
+            <mat-label>{{t('AGE OF DRIVER')}}</mat-label>
+            <mat-select formControlName="driverAge">
+              <mat-option [value]="null">Unset</mat-option>
+              <mat-option *ngFor="let age of driverAgeArr" [value]="age">
+                {{age}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="m-auto" fxLayout="column">
+          <button type="submit" mat-raised-button color="primary" [disabled]="searchForm.invalid">{{t('Search Rental Cars')}}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

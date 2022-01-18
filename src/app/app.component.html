@@ -1,0 +1,27 @@
+<ng-container *transloco="let t">
+  <mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>{{t('Rent Application')}}</span>
+    <span class="toolbar"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>share</mat-icon>
+    </button>
+    <mat-slide-toggle (change)="change($event)">Spanish</mat-slide-toggle>
+  </mat-toolbar>
+  <nav mat-tab-nav-bar color="primary" backgroundColor="primary">
+    <a mat-tab-link *ngFor="let item of tabs" [routerLink]="item.link" routerLinkActive #rla="routerLinkActive"
+       [active]="rla.isActive">
+      <mat-icon class="mr-5">{{item.icon}}</mat-icon>
+      {{t(item.label)}}
+    </a>
+  </nav>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
+
